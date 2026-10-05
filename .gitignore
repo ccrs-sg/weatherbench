@@ -17,6 +17,22 @@ figures/*
 !figures/traditional_ne.png
 !figures/dynamic_ne.png
 !figures/combined_ne.png
+!figures/traditional_full_year.csv
+!figures/dynamic_full_year.csv
+!figures/combined_full_year.csv
+!figures/traditional_12cases.csv
+!figures/dynamic_12cases.csv
+!figures/combined_12cases.csv
+!figures/traditional_im.csv
+!figures/dynamic_im.csv
+!figures/combined_im.csv
+!figures/traditional_sw.csv
+!figures/dynamic_sw.csv
+!figures/combined_sw.csv
+!figures/traditional_ne.csv
+!figures/dynamic_ne.csv
+!figures/combined_ne.csv
+!figures/12cases_extreme_event_dates.csv
 # Python
 __pycache__/
 *.pyc

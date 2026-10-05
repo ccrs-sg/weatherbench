@@ -637,6 +637,13 @@ def plot_traditional(model_keys, add_configs, period, outname):
     cbar.set_ticklabels([f"{vmin:.2f}", f"{(vmin+vmax)/2:.2f}", f"{vmax:.2f}"])
 
     out_path = FIG_DIR / outname
+    csv_rows = []
+    for m in model_keys:
+        for idx, (v, _) in enumerate(TRAD_VARS):
+            row = {"model": MODEL_DISPLAY.get(m, m), "variable": TRAD_DISPLAY[v].replace("\n", " ")}
+            row.update({f"lead_{lt}h": matrices[m][idx, k] for k, lt in enumerate(LEADS)})
+            csv_rows.append(row)
+    pd.DataFrame(csv_rows).to_csv(out_path.with_suffix(".csv"), index=False)
     fig.savefig(str(out_path), dpi=150, bbox_inches="tight")
     plt.close(fig)
     print(f"Saved -> {out_path}")
@@ -1425,6 +1432,15 @@ def plot_dynamic(model_keys, add_configs, period, outname):
     cbar.set_ticklabels([f"{vmin:.2f}", f"{(vmin+vmax)/2:.2f}", f"{vmax:.2f}"])
 
     out_path = FIG_DIR / outname
+    var_labels = [DYN_DISPLAY[v].replace("\n", " ") for v in DYN_VARS] + \
+                 ["HKE Spectrum NRMSE (scaled)", "Precipitation FSS (scaled)"]
+    csv_rows = []
+    for m in model_keys:
+        for idx, label in enumerate(var_labels):
+            row = {"model": MODEL_DISPLAY.get(m, m), "variable": label}
+            row.update({f"lead_{lt}h": matrices[m][idx, k] for k, lt in enumerate(LEADS)})
+            csv_rows.append(row)
+    pd.DataFrame(csv_rows).to_csv(out_path.with_suffix(".csv"), index=False)
     fig.savefig(str(out_path), dpi=150, bbox_inches="tight")
     plt.close(fig)
     print(f"Saved -> {out_path}")
@@ -1552,6 +1568,12 @@ def plot_combined(model_keys, add_configs, period, outname):
     fig.legend(handles=legend_handles, loc="upper left", bbox_to_anchor=(1.02, 1.0), bbox_transform=fig.transFigure, fontsize=9, frameon=False)
 
     out_path = FIG_DIR / outname
+    csv_rows = []
+    for i, m in enumerate(model_keys):
+        row = {"model": MODEL_DISPLAY.get(m, m)}
+        row.update({f"lead_{lt}h": matrix[i, k] for k, lt in enumerate(LEADS)})
+        csv_rows.append(row)
+    pd.DataFrame(csv_rows).to_csv(out_path.with_suffix(".csv"), index=False)
     fig.savefig(str(out_path), dpi=150, bbox_inches="tight")
     plt.close(fig)
     print(f"Saved -> {out_path}")

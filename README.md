@@ -112,11 +112,16 @@ as-is in their native units.
 
     npz/                 Cached Traditional + Dynamic + Spectra results, one file per model/period
     fss/                 Cached precipitation FSS results, one file per model/period
-    figures/             Generated plots. The clean, precomputed-only plots
+    figures/             Generated plots, each saved alongside a matching CSV
+                          of the underlying table (figures/{mode}_{period}.csv).
+                          The clean, precomputed-only plots and CSVs
                           (traditional/dynamic/combined, all 5 periods) are
                           version-controlled as the repo's reference figures;
                           anything including a live-added model is regenerated
-                          locally and not tracked
+                          locally and not tracked. Also includes
+                          figures/12cases_extreme_event_dates.csv, a static
+                          reference of each 12-case study's wind-peak and
+                          precipitation-peak timestamps
     reference_values/    Cached truth-derived normalization constants, one per distinct truth path
     spectra_reference/   Cached ERA5 per-lead spectra, one per distinct truth path
                           (built on first use -- not pre-shipped, even for our own default truth)
