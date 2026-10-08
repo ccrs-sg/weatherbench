@@ -4,3 +4,4 @@ xarray
 cfgrib
 matplotlib
 scores
+netCDF4
